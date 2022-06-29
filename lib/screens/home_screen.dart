@@ -8,31 +8,22 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final menuOptions = AppRoutes.menuOptions;
-
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Menu'),
-        ),
-        //initialRoute: AppRoutes.initialRoute,
-        //routes: AppRoutes.getAppRoutes(),
-        //onGenerateRoute: AppRoutes.onGenerateRoute,
-        //theme: AppTheme.lightTheme);
-
+        appBar: AppBar(title: const Text('Componentes en Flutter')),
         body: ListView.separated(
-            itemBuilder: (context, i) => ListTile(
-                  leading: Icon(menuOptions[i].icon, color: AppTheme.primary),
-                  title: Text(menuOptions[i].name),
+            itemBuilder: (context, index) => ListTile(
+                  leading: Icon(AppRoutes.menuOptions[index].icon,
+                      color: Colors.indigo),
+                  title: Text(AppRoutes.menuOptions[index].name),
                   onTap: () {
-                    // final route = MaterialPageRoute(
-                    //   builder: (context) => const Listview1Screen(),
-                    // );
-                    // Navigator.push(context, route );
-
-                    Navigator.pushNamed(context, menuOptions[i].route);
+                    //   final route = MaterialPageRoute(
+                    //   builder: (context) => const CardScreen());
+                    //    Navigator.push(context, route);
+                    Navigator.pushNamed(
+                        context, AppRoutes.menuOptions[index].route);
                   },
                 ),
             separatorBuilder: (_, __) => const Divider(),
-            itemCount: menuOptions.length));
+            itemCount: AppRoutes.menuOptions.length));
   }
 }
