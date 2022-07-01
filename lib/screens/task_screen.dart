@@ -10,8 +10,9 @@ class TaskScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('Monitor de Tareas')),
       body: ListView.builder(
           itemCount: 10,
-          itemBuilder: (BuildContext context, int index) =>
-              const ProdcutCard()),
+          itemBuilder: (BuildContext context, int index) => GestureDetector(
+              onTap: () => Navigator.pushNamed(context, 'taske'),
+              child: const ProdcutCard())),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {},

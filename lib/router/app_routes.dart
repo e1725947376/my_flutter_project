@@ -34,7 +34,12 @@ class AppRoutes {
         route: 'task',
         name: 'Monitor Tareas',
         screen: const TaskScreen(),
-        icon: Icons.task_alt_outlined)
+        icon: Icons.task_alt_outlined),
+    MenuOption(
+        route: 'taske',
+        name: 'Registrar Tareas',
+        screen: const TaskeditScreen(),
+        icon: Icons.add_task_outlined)
   ];
 
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {

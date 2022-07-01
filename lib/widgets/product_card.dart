@@ -17,7 +17,8 @@ class ProdcutCard extends StatelessWidget {
             children: [
               _BackgroundImage(),
               _ProductDetails(),
-              Positioned(top: 0, right: 0, child: _PriceTag())
+              Positioned(top: 0, right: 0, child: _PriceTag()),
+              Positioned(top: 0, left: 0, child: _NotAvailable())
             ],
           ),
         ));
@@ -30,6 +31,28 @@ class ProdcutCard extends StatelessWidget {
             BoxShadow(
                 color: Colors.black12, offset: Offset(0, 7), blurRadius: 10)
           ]);
+}
+
+class _NotAvailable extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: FittedBox(
+        fit: BoxFit.contain,
+        child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Text('No disponible',
+                style: TextStyle(color: Colors.white, fontSize: 20))),
+      ),
+      width: 100,
+      height: 70,
+      alignment: Alignment.center,
+      decoration: const BoxDecoration(
+          color: Colors.amber,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(25), bottomRight: Radius.circular(25))),
+    );
+  }
 }
 
 class _PriceTag extends StatelessWidget {
