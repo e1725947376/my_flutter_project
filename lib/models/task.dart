@@ -5,17 +5,18 @@
 import 'dart:convert';
 
 class Task {
-  Task({
-    required this.available,
-    required this.name,
-    this.picture,
-    required this.price,
-  });
+  Task(
+      {required this.available,
+      required this.name,
+      this.picture,
+      required this.price,
+      this.id});
 
   bool available;
   String name;
   String? picture;
   double price;
+  String? id;
 
   factory Task.fromJson(String str) => Task.fromMap(json.decode(str));
 
@@ -34,4 +35,11 @@ class Task {
         "picture": picture,
         "price": price,
       };
+
+  Task copy() => Task(
+      available: this.available,
+      name: this.name,
+      picture: this.picture,
+      price: this.price,
+      id: this.id);
 }

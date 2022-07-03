@@ -5,7 +5,7 @@ import 'package:fl_voy_app/models/models.dart';
 import 'package:fl_voy_app/screens/screens.dart';
 
 class AppRoutes {
-  static const initialRoute = 'task';
+  static const initialRoute = 'login';
 
   static final menuOptions = <MenuOption>[
     //TODO: borrar home

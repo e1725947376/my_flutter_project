@@ -1,16 +1,15 @@
 import 'package:fl_voy_app/providers/login_form_provider.dart';
 import 'package:fl_voy_app/router/app_routes.dart';
 import 'package:fl_voy_app/screens/screens.dart';
+import 'package:fl_voy_app/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_voy_app/ui/input_decorations.dart';
 import 'package:provider/provider.dart';
 
 import 'package:fl_voy_app/widgets/widgets.dart';
 
-import '../services/services.dart';
-
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,8 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 10),
-                  Text('Login', style: Theme.of(context).textTheme.headline4),
+                  Text('Crear cuenta',
+                      style: Theme.of(context).textTheme.headline4),
                   const SizedBox(height: 30),
                   ChangeNotifierProvider(
                     create: (_) => LoginFormProvider(),
@@ -35,16 +35,13 @@ class LoginScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             TextButton(
-                onPressed: () {
-                  final route = MaterialPageRoute(
-                      builder: (context) => const RegisterScreen());
-                  Navigator.pushReplacement(context, route);
-                },
+                onPressed: () =>
+                    Navigator.pushReplacementNamed(context, 'login'),
                 style: ButtonStyle(
                     overlayColor: MaterialStateProperty.all(
                         Colors.deepPurple.withOpacity(0.1)),
                     shape: MaterialStateProperty.all(StadiumBorder())),
-                child: const Text('Registrar nueva cuenta',
+                child: const Text('¿Ya tienes una cuenta?',
                     style: TextStyle(fontSize: 18, color: Colors.black87)))
           ],
         ),
@@ -120,8 +117,8 @@ class _LoginForm extends StatelessWidget {
                             Provider.of<AuthService>(context, listen: false);
                         if (!loginForm.isValidForm()) return;
                         loginForm.isLoading = true;
-                        final String? errorMessage = await authService.login(
-                            loginForm.email, loginForm.password);
+                        final String? errorMessage = await authService
+                            .createUser(loginForm.email, loginForm.password);
                         if (errorMessage == null) {
                           Navigator.pushReplacementNamed(context, 'home');
                         } else {

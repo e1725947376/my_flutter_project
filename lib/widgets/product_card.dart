@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../models/models.dart';
+
 class ProdcutCard extends StatelessWidget {
-  const ProdcutCard({Key? key}) : super(key: key);
+  final Task task;
+
+  const ProdcutCard({super.key, required this.task});
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +19,11 @@ class ProdcutCard extends StatelessWidget {
           child: Stack(
             alignment: Alignment.bottomLeft,
             children: [
-              _BackgroundImage(),
-              _ProductDetails(),
-              Positioned(top: 0, right: 0, child: _PriceTag()),
-              Positioned(top: 0, left: 0, child: _NotAvailable())
+              _BackgroundImage(task.picture),
+              _ProductDetails(title: task.name, subTitle: task.id!),
+              Positioned(top: 0, right: 0, child: _PriceTag(task.price)),
+              if (!task.available)
+                Positioned(top: 0, left: 0, child: _NotAvailable())
             ],
           ),
         ));
@@ -56,6 +61,10 @@ class _NotAvailable extends StatelessWidget {
 }
 
 class _PriceTag extends StatelessWidget {
+  final double price;
+
+  const _PriceTag(this.price);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -63,7 +72,7 @@ class _PriceTag extends StatelessWidget {
         fit: BoxFit.contain,
         child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Text('\$103.99',
+            child: Text('\$$price',
                 style: TextStyle(color: Colors.white, fontSize: 20))),
       ),
       width: 100,
@@ -78,6 +87,11 @@ class _PriceTag extends StatelessWidget {
 }
 
 class _ProductDetails extends StatelessWidget {
+  final String title;
+  final String subTitle;
+
+  const _ProductDetails({required this.title, required this.subTitle});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -89,9 +103,9 @@ class _ProductDetails extends StatelessWidget {
         decoration: _buildBoxDecoration(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             Text(
-              'Comprar Pan',
+              title,
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
@@ -99,8 +113,7 @@ class _ProductDetails extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            Text('10 panes -cachitos y enrollados',
-                style: TextStyle(fontSize: 15, color: Colors.white))
+            Text(subTitle, style: TextStyle(fontSize: 15, color: Colors.white))
           ],
         ),
       ),
@@ -114,6 +127,10 @@ class _ProductDetails extends StatelessWidget {
 }
 
 class _BackgroundImage extends StatelessWidget {
+  final String? url;
+
+  const _BackgroundImage(this.url);
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -121,11 +138,13 @@ class _BackgroundImage extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 400,
-        child: const FadeInImage(
-          placeholder: AssetImage('assets/jar-loading.gif'),
-          image: NetworkImage('https://via.placeholder.com/400x300/f6f6f6'),
-          fit: BoxFit.cover,
-        ),
+        child: url == null
+            ? Image(image: AssetImage('assets/no-image.png'), fit: BoxFit.cover)
+            : FadeInImage(
+                placeholder: AssetImage('assets/jar-loading.gif'),
+                image: NetworkImage(url!),
+                fit: BoxFit.cover,
+              ),
       ),
     );
   }
