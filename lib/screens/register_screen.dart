@@ -1,7 +1,7 @@
 import 'package:fl_voy_app/providers/login_form_provider.dart';
 import 'package:fl_voy_app/router/app_routes.dart';
 import 'package:fl_voy_app/screens/screens.dart';
-import 'package:fl_voy_app/services/auth_services.dart';
+import 'package:fl_voy_app/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_voy_app/ui/input_decorations.dart';
 import 'package:provider/provider.dart';

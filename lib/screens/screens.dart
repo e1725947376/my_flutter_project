@@ -1,3 +1,4 @@
+export 'package:fl_voy_app/screens/task_screen.dart';
 export 'package:fl_voy_app/screens/check_auth_screen.dart';
 export 'package:fl_voy_app/screens/register_screen.dart';
 export 'package:fl_voy_app/screens/loading_screen.dart';

@@ -1,6 +1,5 @@
 import 'package:fl_voy_app/router/app_routes.dart';
-import 'package:fl_voy_app/services/auth_services.dart';
-import 'package:fl_voy_app/services/tasks_service.dart';
+import 'package:fl_voy_app/services/services.dart';
 import 'package:fl_voy_app/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_voy_app/screens/screens.dart';
@@ -23,8 +22,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'App Voy',
-        initialRoute: AppRoutes.initialRoute,
-        routes: AppRoutes.getAppRoutes(),
+        initialRoute: 'checking',
+        routes: {
+          'login': (_) => const LoginScreen(),
+          'register': (_) => const RegisterScreen(),
+          'home': (_) => const HomeScreen(),
+          'taske': (_) => const TaskeditScreen(),
+          'checking': (_) => const CheckauthScreen(),
+          'task': (_) => const TaskScreen(),
+          'card': (_) => const CardScreen()
+        },
+        scaffoldMessengerKey: NotificationsService.messengerKey,
         onGenerateRoute: AppRoutes.onGenerateRoute,
         theme: ThemeData.light().copyWith(
             scaffoldBackgroundColor: Colors.grey[300],

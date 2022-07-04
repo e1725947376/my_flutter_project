@@ -35,11 +35,8 @@ class LoginScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             TextButton(
-                onPressed: () {
-                  final route = MaterialPageRoute(
-                      builder: (context) => const RegisterScreen());
-                  Navigator.pushReplacement(context, route);
-                },
+                onPressed: () =>
+                    Navigator.pushReplacementNamed(context, 'register'),
                 style: ButtonStyle(
                     overlayColor: MaterialStateProperty.all(
                         Colors.deepPurple.withOpacity(0.1)),
@@ -118,14 +115,19 @@ class _LoginForm extends StatelessWidget {
                         FocusScope.of(context).unfocus();
                         final authService =
                             Provider.of<AuthService>(context, listen: false);
+
                         if (!loginForm.isValidForm()) return;
                         loginForm.isLoading = true;
+
                         final String? errorMessage = await authService.login(
                             loginForm.email, loginForm.password);
+
                         if (errorMessage == null) {
                           Navigator.pushReplacementNamed(context, 'home');
                         } else {
                           print(errorMessage);
+
+                          NotificationsService.showSnackbar(errorMessage);
                           loginForm.isLoading = false;
                         }
                       })
