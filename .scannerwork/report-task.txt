@@ -1,0 +1,6 @@
+projectKey=fl_app_voy
+serverUrl=http://localhost:9000
+serverVersion=9.5.0.56709
+dashboardUrl=http://localhost:9000/dashboard?id=fl_app_voy
+ceTaskId=AYHvBv4uhye8ILWRA2Hm
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYHvBv4uhye8ILWRA2Hm
